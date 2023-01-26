@@ -31,7 +31,6 @@ public class PersistenceConfig {
 		sessionFactory.setDataSource(restDataSource());
 		sessionFactory.setPackagesToScan(new String[] { "com.chandu.hibernetpractice.entity" });
 		sessionFactory.setHibernateProperties(hibernateProperties());
-
 		return sessionFactory;
 	}
 

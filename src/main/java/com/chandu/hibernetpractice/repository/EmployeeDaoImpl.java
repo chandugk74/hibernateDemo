@@ -10,25 +10,26 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.chandu.hibernetpractice.entity.Employee;
+import com.chandu.hibernetpractice.entity.EmployeeEntity;
+import com.chandu.hibernetpractice.model.EmployeeModel;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public Employee create(Employee employee) {
+	public EmployeeEntity create(EmployeeEntity employee) {
 		Session session = sessionFactory.getCurrentSession();
 		session.save(employee);
 		return employee;
 	}
 
 	@Override
-	public Employee getByID(int id) {
+	public EmployeeEntity getByID(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(Employee.class);
+		Criteria criteria = session.createCriteria(EmployeeEntity.class);
 		criteria.add(Restrictions.eq("id", id));
-		List<Employee> em = criteria.list();
+		List<EmployeeEntity> em = criteria.list();
 		//return (Employee) criteria.list().get(0);
 		return em.get(0);
 	}
@@ -36,11 +37,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public Boolean deleteByID(int id) {
 		Session session = sessionFactory.getCurrentSession();
-		Object persistentInstance = session.load(Employee.class, id);
+		Object persistentInstance = session.load(EmployeeEntity.class, id);
 		if (persistentInstance != null) {
 		    session.delete(persistentInstance);
 		    return true;
 		}
 		return false;
+	}
+
+	@Override
+	public EmployeeEntity updateById(EmployeeEntity employeeEntity) {
+		Session session = sessionFactory.getCurrentSession();
+		session.update(employeeEntity);
+		return employeeEntity;
 	}
 }

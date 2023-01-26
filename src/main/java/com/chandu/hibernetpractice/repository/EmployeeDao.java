@@ -1,12 +1,15 @@
 package com.chandu.hibernetpractice.repository;
 
-import com.chandu.hibernetpractice.entity.Employee;
+import com.chandu.hibernetpractice.entity.EmployeeEntity;
+import com.chandu.hibernetpractice.model.EmployeeModel;
 
 public interface EmployeeDao {
-	Employee create(Employee employee);
+	EmployeeEntity create(EmployeeEntity employee);
 
-	Employee getByID(int id);
+	EmployeeEntity getByID(int id);
 
 	Boolean deleteByID(int id);
+
+	EmployeeEntity updateById(EmployeeEntity employeeEntity);
 
 }

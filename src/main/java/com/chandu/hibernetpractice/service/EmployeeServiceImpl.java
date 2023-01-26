@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.chandu.hibernetpractice.entity.Employee;
+import com.chandu.hibernetpractice.entity.EmployeeEntity;
 import com.chandu.hibernetpractice.model.EmployeeModel;
 import com.chandu.hibernetpractice.repository.EmployeeDao;
 
@@ -18,8 +18,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	EmployeeDao employeeDao;
 
 	public EmployeeModel create(EmployeeModel employeeModel) {
-
-		Employee e = new Employee();
+		EmployeeEntity e = new EmployeeEntity();
 		BeanUtils.copyProperties(employeeModel, e);
 //		e.setName(employeeModel.getName());
 //		e.setAge(employeeModel.getAge());
@@ -31,7 +30,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public EmployeeModel getId(int id) {
-		Employee employee = employeeDao.getByID(id);
+		EmployeeEntity employee = employeeDao.getByID(id);
 		EmployeeModel emp = new EmployeeModel();
 		BeanUtils.copyProperties(employee, emp);
 		return emp;
@@ -42,4 +41,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.deleteByID(id);
 	}
 
+	@Override
+	public EmployeeEntity updateById(EmployeeEntity employeeEntity) {
+		return employeeDao.updateById(employeeEntity);
+
+	}
 }
