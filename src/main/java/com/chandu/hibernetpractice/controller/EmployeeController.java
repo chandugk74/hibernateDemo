@@ -1,5 +1,7 @@
 package com.chandu.hibernetpractice.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +32,13 @@ public class EmployeeController {
 	public ResponseEntity<EmployeeModel> getByID(@PathVariable("id") int id){
 		return ResponseEntity.ok(emloyeeService.getId(id));
 	}
+	
+	//get all emp
+	@GetMapping("/all")
+	public ResponseEntity<List<EmployeeModel>> getAllEmp(){
+		return ResponseEntity.ok(emloyeeService.getAll());
+	}
+	
 //deleteByID
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Boolean> deleteById(@PathVariable("id") int id){

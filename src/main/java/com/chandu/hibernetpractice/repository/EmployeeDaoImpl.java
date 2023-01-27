@@ -18,12 +18,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Autowired
 	SessionFactory sessionFactory;
 	
-	public EmployeeEntity create(EmployeeEntity employee) {
+	public EmployeeEntity create(EmployeeEntity employeeEntity) {
 		Session session = sessionFactory.getCurrentSession();
-		session.save(employee);
-		return employee;
+		session.save(employeeEntity);
+		return employeeEntity;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public EmployeeEntity getByID(int id) {
 		Session session = sessionFactory.getCurrentSession();
@@ -50,5 +51,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Session session = sessionFactory.getCurrentSession();
 		session.update(employeeEntity);
 		return employeeEntity;
+	}
+
+	public List<EmployeeModel> getAll() {
+		Session session = sessionFactory.getCurrentSession();
+		return sessionFactory.getCurrentSession().createCriteria(EmployeeEntity.class).list();
 	}
 }
